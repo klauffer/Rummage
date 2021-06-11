@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Search.Tests
 {
-    public class SearchEngineShould
+    public class BasicSearchShould
     {
         [Fact]
         public void FindExactMatch()
@@ -15,6 +15,24 @@ namespace Search.Tests
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer", actual.MatchingPhrase);
+        }
+
+        [Fact]
+        public void FindSubsetMatch()
+        {
+            var searchEngine = SetUp();
+            var searchResult = searchEngine.Search("ome");
+            var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
+            Assert.Equal("1", actual.PhraseId);
+            Assert.Equal("Homer", actual.MatchingPhrase);
+        }
+
+        [Fact]
+        public void NotFindMatch()
+        {
+            var searchEngine = SetUp();
+            var searchResult = searchEngine.Search("qwerty");
+            Assert.Empty(searchResult);
         }
 
         private SearchEngine SetUp()

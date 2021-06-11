@@ -7,8 +7,9 @@ namespace Search.FuzzySearch.Basic
     {
         public IEnumerable<SearchResult> Run(string searchTerm, HashSet<IndexItem> index)
         {
-            var result = index.Single(x => x.Phrase == searchTerm);
-            return new List<SearchResult>() { new SearchResult(result.PhraseId, result.Phrase) };
+            var result = index.Where(x => x.Phrase.Contains(searchTerm))
+                              .Select(x => new SearchResult(x.PhraseId, x.Phrase));
+            return result;
         }
     }
 }
