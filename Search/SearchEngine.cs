@@ -1,21 +1,23 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using Search.FuzzySearch;
 
 namespace Search
 {
     public sealed class SearchEngine
     {
         private readonly IGetData _getSearchData;
+        private readonly IFuzzySearch _fuzzySearch;
 
-        public SearchEngine(IGetData getSearchData)
+        public SearchEngine(IGetData getSearchData, FuzzySearchType searchType)
         {
             _getSearchData = getSearchData;
+            _fuzzySearch = FuzzySearchFactory.GetFuzzySearch(searchType);
         }
 
-        public SearchResult Search(string searchTerm)
+        public IEnumerable<SearchResult> Search(string searchTerm)
         {
             var data = _getSearchData.GetIndexToSearch();
-            var result = data.Single(x => x.Phrase == searchTerm);
-            return new SearchResult(result.PhraseId, result.Phrase);
+            return _fuzzySearch.Run(searchTerm, data);
         }
     }
 }
