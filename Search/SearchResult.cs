@@ -2,13 +2,13 @@
 {
     public class SearchResult
     {
-        public SearchResult(int phraseId, string matchingPhrase)
+        public SearchResult(string phraseId, string matchingPhrase)
         {
             PhraseId = phraseId;
             MatchingPhrase = matchingPhrase;
         }
 
-        public int PhraseId { get; }
+        public string PhraseId { get; }
         public string MatchingPhrase { get; }
     }
 }

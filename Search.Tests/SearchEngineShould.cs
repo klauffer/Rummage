@@ -9,19 +9,19 @@ namespace Search.Tests
         public void FindExactMatch()
         {
             var getData = new GetData();
-            getData.Set.Add(new KeyValuePair<int, string>(1, "Homer"));
+            getData.Set.Add(new KeyValuePair<string, string>("1", "Homer"));
             var searchEngine = new SearchEngine(getData);
             var searchResult = searchEngine.Search("Homer");
 
-            Assert.Equal(1, searchResult.PhraseId);
+            Assert.Equal("1", searchResult.PhraseId);
             Assert.Equal("Homer", searchResult.MatchingPhrase);
         }
 
         private class GetData : IGetData
         {
-            public HashSet<KeyValuePair<int, string>> Set = new HashSet<KeyValuePair<int, string>>();
+            public HashSet<KeyValuePair<string, string>> Set = new HashSet<KeyValuePair<string, string>>();
 
-            public HashSet<KeyValuePair<int, string>> GetIndexToSearch() => Set;
+            public HashSet<KeyValuePair<string, string>> GetIndexToSearch() => Set;
         }
     }
 }
