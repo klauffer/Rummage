@@ -9,7 +9,7 @@ namespace Search.Tests
         public void FindExactMatch()
         {
             var getData = new GetData();
-            getData.Set.Add(new KeyValuePair<string, string>("1", "Homer"));
+            getData.Set.Add(new IndexItem("1", "Homer"));
             var searchEngine = new SearchEngine(getData);
             var searchResult = searchEngine.Search("Homer");
 
@@ -19,9 +19,9 @@ namespace Search.Tests
 
         private class GetData : IGetData
         {
-            public HashSet<KeyValuePair<string, string>> Set = new HashSet<KeyValuePair<string, string>>();
+            public HashSet<IndexItem> Set = new HashSet<IndexItem>();
 
-            public HashSet<KeyValuePair<string, string>> GetIndexToSearch() => Set;
+            public HashSet<IndexItem> GetIndexToSearch() => Set;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Search
 {
-    public class SearchResult
+    public sealed class SearchResult
     {
         public SearchResult(string phraseId, string matchingPhrase)
         {

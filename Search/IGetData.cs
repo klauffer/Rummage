@@ -4,6 +4,6 @@ namespace Search
 {
     public interface IGetData
     {
-        HashSet<KeyValuePair<string, string>> GetIndexToSearch();
+        HashSet<IndexItem> GetIndexToSearch();
     }
 }

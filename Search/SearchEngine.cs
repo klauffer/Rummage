@@ -2,7 +2,7 @@
 
 namespace Search
 {
-    public class SearchEngine
+    public sealed class SearchEngine
     {
         private readonly IGetData _getSearchData;
 
@@ -14,8 +14,8 @@ namespace Search
         public SearchResult Search(string searchTerm)
         {
             var data = _getSearchData.GetIndexToSearch();
-            var result = data.Single(x => x.Value == searchTerm);
-            return new SearchResult(result.Key, result.Value);
+            var result = data.Single(x => x.Phrase == searchTerm);
+            return new SearchResult(result.PhraseId, result.Phrase);
         }
     }
 }
