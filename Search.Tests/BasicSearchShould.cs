@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Search.FuzzySearch;
 using Xunit;
 
@@ -8,30 +9,30 @@ namespace Search.Tests
     public class BasicSearchShould
     {
         [Fact]
-        public void FindExactMatch()
+        public async void FindExactMatch()
         {
             var searchEngine = SetUp();
-            var searchResult = searchEngine.Search("Homer");
+            var searchResult = await searchEngine.Search("Homer");
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer", actual.MatchingPhrase);
         }
 
         [Fact]
-        public void FindSubsetMatch()
+        public async void FindSubsetMatch()
         {
             var searchEngine = SetUp();
-            var searchResult = searchEngine.Search("ome");
+            var searchResult = await searchEngine.Search("ome");
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer", actual.MatchingPhrase);
         }
 
         [Fact]
-        public void NotFindMatch()
+        public async void NotFindMatch()
         {
             var searchEngine = SetUp();
-            var searchResult = searchEngine.Search("qwerty");
+            var searchResult = await searchEngine.Search("qwerty");
             Assert.Empty(searchResult);
         }
 
@@ -46,7 +47,8 @@ namespace Search.Tests
         {
             public HashSet<IndexItem> Set = new HashSet<IndexItem>();
 
-            public HashSet<IndexItem> GetIndexToSearch() => Set;
+            public Task<HashSet<IndexItem>> GetIndexToSearch() => Task.FromResult(Set);
+
         }
     }
 }

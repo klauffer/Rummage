@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Search
 {
     public interface IGetData
     {
-        HashSet<IndexItem> GetIndexToSearch();
+        Task<HashSet<IndexItem>> GetIndexToSearch();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Search.FuzzySearch;
 
 namespace Search
@@ -14,9 +15,9 @@ namespace Search
             _fuzzySearch = FuzzySearchFactory.GetFuzzySearch(searchType);
         }
 
-        public IEnumerable<SearchResult> Search(string searchTerm)
+        public async Task<IEnumerable<SearchResult>> Search(string searchTerm)
         {
-            var data = _getSearchData.GetIndexToSearch();
+            var data = await _getSearchData.GetIndexToSearch();
             return _fuzzySearch.Run(searchTerm, data);
         }
     }
