@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Search.FuzzySearch;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Search.Tests
 {
     public class BasicSearchShould
     {
+        private ITestOutputHelper OutputHelper { get; }
+        public BasicSearchShould(ITestOutputHelper outputHelper)
+        {
+            OutputHelper = outputHelper;
+        }
+
         [Fact]
         public async void FindExactMatch()
         {
@@ -52,15 +61,15 @@ namespace Search.Tests
         {
             var getData = new GetData();
             getData.Set.Add(new IndexItem("1", "Homer"));
-            return new SearchEngine(getData, FuzzySearchType.Basic);
+            var logger = TestLogger.CreateLogger<SearchEngine>(OutputHelper);
+            return new SearchEngine(getData, FuzzySearchType.Basic, logger);
         }
 
         private class GetData : IGetData
         {
             public HashSet<IndexItem> Set = new HashSet<IndexItem>();
 
-            public Task<HashSet<IndexItem>> GetIndexToSearch(CancellationToken cancellationToken) => Task.FromResult(Set);
-
+            public Task<HashSet<IndexItem>> GetIndexedDataToSearch(CancellationToken cancellationToken) => Task.FromResult(Set);
         }
     }
 }

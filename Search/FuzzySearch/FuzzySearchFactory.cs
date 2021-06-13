@@ -1,16 +1,17 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Search.FuzzySearch.Basic;
 
 namespace Search.FuzzySearch
 {
     internal static class FuzzySearchFactory
     {
-        public static IFuzzySearch GetFuzzySearch(FuzzySearchType type)
+        public static IFuzzySearch GetFuzzySearch(FuzzySearchType type, ILogger logger)
         {
             switch (type)
             {
                 case FuzzySearchType.Basic:
-                    return new BasicSearch();
+                    return new BasicSearch(logger);
                 default:
                     throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name);
             }

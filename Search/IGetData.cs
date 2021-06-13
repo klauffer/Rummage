@@ -6,6 +6,6 @@ namespace Search
 {
     public interface IGetData
     {
-        Task<HashSet<IndexItem>> GetIndexToSearch(CancellationToken cancellationToken);
+        Task<HashSet<IndexItem>> GetIndexedDataToSearch(CancellationToken cancellationToken);
     }
 }
