@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Search.FuzzySearch;
 using Xunit;
@@ -36,6 +38,16 @@ namespace Search.Tests
             Assert.Empty(searchResult);
         }
 
+        [Fact]
+        public async void CancelSearch()
+        {
+            var searchEngine = SetUp();
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
+            tokenSource.Cancel();
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await searchEngine.Search("qqq", token));
+        }
+
         private SearchEngine SetUp()
         {
             var getData = new GetData();
@@ -47,7 +59,7 @@ namespace Search.Tests
         {
             public HashSet<IndexItem> Set = new HashSet<IndexItem>();
 
-            public Task<HashSet<IndexItem>> GetIndexToSearch() => Task.FromResult(Set);
+            public Task<HashSet<IndexItem>> GetIndexToSearch(CancellationToken cancellationToken) => Task.FromResult(Set);
 
         }
     }
