@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 
-namespace Search.FuzzySearch.Basic
+namespace Search.FuzzySearch
 {
     internal sealed class BasicSearch : IFuzzySearch
     {
