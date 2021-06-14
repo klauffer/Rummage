@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Search.FuzzySearch;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class LevenshteinSearchShould
+    public class LevenshteinSearchShould : TestSetup
     {
-        private ITestOutputHelper OutputHelper { get; }
-        public LevenshteinSearchShould(ITestOutputHelper outputHelper)
+        public LevenshteinSearchShould(ITestOutputHelper outputHelper) : base(outputHelper)
         {
-            OutputHelper = outputHelper;
         }
 
         [Fact]
         public async void FindExactMatch()
         {
-            var searchEngine = SetUp();
+            var searchEngine = SetUp(FuzzySearchType.Levenshtein);
             var searchResult = await searchEngine.Search("Homer Simpson");
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
@@ -30,7 +26,7 @@ namespace Search.Tests
         [Fact]
         public async void FindSubsetMatch()
         {
-            var searchEngine = SetUp();
+            var searchEngine = SetUp(FuzzySearchType.Levenshtein);
             var searchResult = await searchEngine.Search("omer");
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
@@ -40,7 +36,7 @@ namespace Search.Tests
         [Fact]
         public async void NotFindMatch()
         {
-            var searchEngine = SetUp();
+            var searchEngine = SetUp(FuzzySearchType.Levenshtein);
             var searchResult = await searchEngine.Search("qwerty");
             Assert.DoesNotContain(searchResult, x => x.MatchingPhrase == "qwerty");
         }
@@ -48,7 +44,7 @@ namespace Search.Tests
         [Fact]
         public async void CancelSearch()
         {
-            var searchEngine = SetUp();
+            var searchEngine = SetUp(FuzzySearchType.Levenshtein);
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
             tokenSource.Cancel();
@@ -56,27 +52,6 @@ namespace Search.Tests
         }
 
 
-        private SearchEngine SetUp()
-        {
-            var getData = new GetData();
-            getData.Set.Add(new IndexItem("1", "Homer Simpson"));
-            getData.Set.Add(new IndexItem("2", "Marge Simpson"));
-            getData.Set.Add(new IndexItem("3", "Bart Simpson"));
-            getData.Set.Add(new IndexItem("4", "Lisa Simpson"));
-            getData.Set.Add(new IndexItem("5", "Maggie Simpson"));
-            getData.Set.Add(new IndexItem("6", "Abraham Jebediah Simpson"));
-            getData.Set.Add(new IndexItem("7", "Ned Flanders"));
-            getData.Set.Add(new IndexItem("8", "Moe Szyslak")); 
-            getData.Set.Add(new IndexItem("9", "Milhouse Van Houten"));
-            var logger = TestLogger.CreateLogger<SearchEngine>(OutputHelper);
-            return new SearchEngine(getData, FuzzySearchType.Levenshtein, logger);
-        }
-
-        private class GetData : IGetData
-        {
-            public HashSet<IndexItem> Set = new HashSet<IndexItem>();
-
-            public Task<HashSet<IndexItem>> GetIndexedDataToSearch(CancellationToken cancellationToken) => Task.FromResult(Set);
-        }
+        
     }
 }
