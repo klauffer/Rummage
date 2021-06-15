@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class BasicSearchShould : TestSetup
+    public class BasicSearchShould : SetupFixture
     {
         public BasicSearchShould(ITestOutputHelper outputHelper) : base(outputHelper)
         {

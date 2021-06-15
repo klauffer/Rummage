@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Search.FuzzySearch;
 using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public abstract class TestSetup
+    public abstract class SetupFixture
     {
         private ITestOutputHelper OutputHelper { get; }
-        public TestSetup(ITestOutputHelper outputHelper)
+        public SetupFixture(ITestOutputHelper outputHelper)
         {
             OutputHelper = outputHelper;
         }
@@ -26,9 +27,11 @@ namespace Search.Tests
             getData.Set.Add(new IndexItem("7", "Ned Flanders"));
             getData.Set.Add(new IndexItem("8", "Moe Szyslak"));
             getData.Set.Add(new IndexItem("9", "Milhouse Van Houten"));
-            var logger = TestLogger.CreateLogger<SearchEngine>(OutputHelper);
+            var logger = GetLogger();
             return new SearchEngine(getData, fuzzySearchType, logger);
         }
+
+        protected ILogger GetLogger() => TestLogger.CreateLogger<SearchEngine>(OutputHelper);
 
         private class GetData : IGetData
         {

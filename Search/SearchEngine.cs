@@ -7,7 +7,7 @@ using Search.FuzzySearch;
 
 namespace Search
 {
-    public sealed class SearchEngine
+    public sealed class SearchEngine : ISearchEngine
     {
         private readonly IGetData _getSearchData;
         private readonly IFuzzySearch _fuzzySearch;
