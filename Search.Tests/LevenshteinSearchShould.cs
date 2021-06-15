@@ -17,7 +17,7 @@ namespace Search.Tests
         public async void FindExactMatch()
         {
             var searchEngine = SetUp(FuzzySearchType.Levenshtein);
-            var searchResult = await searchEngine.Search("Homer Simpson");
+            var searchResult = await searchEngine.Search("Homer Simpson", Data);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
@@ -27,7 +27,7 @@ namespace Search.Tests
         public async void FindSubsetMatch()
         {
             var searchEngine = SetUp(FuzzySearchType.Levenshtein);
-            var searchResult = await searchEngine.Search("omer");
+            var searchResult = await searchEngine.Search("omer", Data);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
@@ -37,7 +37,7 @@ namespace Search.Tests
         public async void NotFindMatch()
         {
             var searchEngine = SetUp(FuzzySearchType.Levenshtein);
-            var searchResult = await searchEngine.Search("qwerty");
+            var searchResult = await searchEngine.Search("qwerty", Data);
             Assert.DoesNotContain(searchResult, x => x.MatchingPhrase == "qwerty");
         }
 
@@ -48,7 +48,7 @@ namespace Search.Tests
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
             tokenSource.Cancel();
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await searchEngine.Search("qqq", token));
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await searchEngine.Search("qqq", Data, token));
         }
 
 

@@ -6,6 +6,6 @@ namespace Search
 {
     public interface ISearchEngine
     {
-        Task<IEnumerable<SearchResult>> Search(string searchTerm, CancellationToken cancellationToken = default);
+        Task<IEnumerable<SearchResult>> Search(string searchTerm, HashSet<IndexItem> dataToSearch, CancellationToken cancellationToken = default);
     }
 }
