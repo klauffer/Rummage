@@ -8,7 +8,7 @@ namespace Search
     {
         public static void AddSearch(this IServiceCollection service, FuzzySearchType fuzzySearchType)
         {
-            service.AddTransient<ISearchEngine>(provider => 
+            service.AddTransient(provider => 
                 new SearchEngine(fuzzySearchType, provider.GetService<ILogger>()));
         }
     }

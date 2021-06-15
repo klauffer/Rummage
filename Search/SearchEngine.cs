@@ -7,7 +7,7 @@ using Search.FuzzySearch;
 
 namespace Search
 {
-    public sealed class SearchEngine : ISearchEngine
+    public sealed class SearchEngine
     { 
         private readonly IFuzzySearch _fuzzySearch;
         private readonly ILogger _logger;
@@ -18,7 +18,7 @@ namespace Search
             _logger = logger;
         }
 
-        public Task<IEnumerable<SearchResult>> Search(string searchTerm, HashSet<IndexItem> dataToSearch, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IEnumerable<SearchResult>> Search(string searchTerm, HashSet<IndexItem> dataToSearch, CancellationToken cancellationToken = default)
         {
             var searchResults = _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
             _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());

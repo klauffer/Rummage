@@ -30,6 +30,24 @@ namespace Search
             }
         }
 
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+                return false;
+
+            IndexItem indexItem = obj as IndexItem;
+            if (indexItem == null)
+                return false;
+            else
+                return Equals(indexItem);
+        }
+
+        public override int GetHashCode()
+        {
+            return PhraseId.GetHashCode();
+        }
+
+
         public static bool operator ==(IndexItem lhs, IndexItem rhs)
         {
             if (lhs is null)

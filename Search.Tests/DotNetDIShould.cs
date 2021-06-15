@@ -18,7 +18,7 @@ namespace Search.Tests
             service.AddSearch(FuzzySearchType.Basic);
             service.AddTransient(_ => GetLogger());
             var provider = service.BuildServiceProvider();
-            var searchEngine = provider.GetService<ISearchEngine>();
+            var searchEngine = provider.GetService<SearchEngine>();
             Assert.NotNull(searchEngine);
         }
     }
