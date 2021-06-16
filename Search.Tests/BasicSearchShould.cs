@@ -7,17 +7,16 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class BasicSearchShould : SetupFixture
+    public class BasicSearchShould : TestFixture
     {
-        public BasicSearchShould(ITestOutputHelper outputHelper) : base(outputHelper)
+        public BasicSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Basic)
         {
         }
 
         [Fact]
         public async void FindExactMatch()
         {
-            var searchEngine = SetUp(FuzzySearchType.Basic);
-            var searchResult = await searchEngine.Search("Homer", Data);
+            var searchResult = await _searchEngine.Search("Homer", Data);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
@@ -26,8 +25,7 @@ namespace Search.Tests
         [Fact]
         public async void FindSubsetMatch()
         {
-            var searchEngine = SetUp(FuzzySearchType.Basic);
-            var searchResult = await searchEngine.Search("ome", Data);
+            var searchResult = await _searchEngine.Search("ome", Data);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
@@ -36,19 +34,17 @@ namespace Search.Tests
         [Fact]
         public async void NotFindMatch()
         {
-            var searchEngine = SetUp(FuzzySearchType.Basic);
-            var searchResult = await searchEngine.Search("qwerty", Data);
+            var searchResult = await _searchEngine.Search("qwerty", Data);
             Assert.Empty(searchResult);
         }
 
         [Fact]
         public async void CancelSearch()
         {
-            var searchEngine = SetUp(FuzzySearchType.Basic);
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
             tokenSource.Cancel();
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await searchEngine.Search("qqq", Data, token));
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", Data, token));
         }
     }
 }

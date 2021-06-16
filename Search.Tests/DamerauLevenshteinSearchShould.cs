@@ -7,13 +7,11 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class DamerauLevenshteinSearchShould : SetupFixture
+    public class DamerauLevenshteinSearchShould : TestFixture
     {
-        private readonly SearchEngine _searchEngine;
 
-        public DamerauLevenshteinSearchShould(ITestOutputHelper outputHelper) : base(outputHelper)
-        {
-            _searchEngine = SetUp(FuzzySearchType.DamerauLevenshtein);
+        public DamerauLevenshteinSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.DamerauLevenshtein)
+        { 
         }
 
         [Fact]

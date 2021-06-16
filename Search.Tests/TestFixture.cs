@@ -5,12 +5,14 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public abstract class SetupFixture
+    public abstract class TestFixture
     {
         private ITestOutputHelper OutputHelper { get; }
-        public SetupFixture(ITestOutputHelper outputHelper)
+        protected readonly SearchEngine _searchEngine;
+        public TestFixture(ITestOutputHelper outputHelper, FuzzySearchType fuzzySearchType)
         {
             OutputHelper = outputHelper;
+            _searchEngine = SetUp(fuzzySearchType);
         }
 
         protected HashSet<IndexItem> Data = new HashSet<IndexItem>()

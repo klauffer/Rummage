@@ -5,9 +5,9 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class DotNetDIShould : SetupFixture
+    public class DotNetDIShould : TestFixture
     {
-        public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper)
+        public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Basic)
         {
         }
 
