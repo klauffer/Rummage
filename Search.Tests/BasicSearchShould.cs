@@ -1,6 +1,8 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Search.FuzzySearch;
 using Xunit;
 using Xunit.Abstractions;
@@ -14,37 +16,49 @@ namespace Search.Tests
         }
 
         [Fact]
-        public async void FindExactMatch()
+        public async Task FindExactMatch()
         {
-            var searchResult = await _searchEngine.Search("Homer", Data);
+            var searchResult = await _searchEngine.Search("Homer", LocalData);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
         }
 
         [Fact]
-        public async void FindSubsetMatch()
+        public async Task FindSubsetMatch()
         {
-            var searchResult = await _searchEngine.Search("ome", Data);
+            var searchResult = await _searchEngine.Search("ome", LocalData);
             var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
             Assert.Equal("1", actual.PhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
         }
 
         [Fact]
-        public async void NotFindMatch()
+        public async Task NotFindMatch()
         {
-            var searchResult = await _searchEngine.Search("qwerty", Data);
+            var searchResult = await _searchEngine.Search("qwerty", LocalData);
             Assert.Empty(searchResult);
         }
 
         [Fact]
-        public async void CancelSearch()
+        public async Task CancelSearch()
         {
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
             tokenSource.Cancel();
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", Data, token));
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", LocalData, token));
+        }
+
+        [Fact]
+        public async Task FindMatchWithinTimeFrame()
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var searchResult = await _searchEngine.Search("idempotent", ExternalData);
+            stopWatch.Stop();
+            var actual = searchResult.FirstOrDefault();
+            Assert.Equal("idempotent", actual.MatchingPhrase);
+            Assert.InRange(stopWatch.ElapsedMilliseconds, 0, 3000);
         }
     }
 }

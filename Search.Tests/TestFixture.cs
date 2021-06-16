@@ -13,9 +13,10 @@ namespace Search.Tests
         {
             OutputHelper = outputHelper;
             _searchEngine = SetUp(fuzzySearchType);
+            ExternalData = DictionaryData.GetData(@"Dictionary.txt");
         }
 
-        protected HashSet<IndexItem> Data = new HashSet<IndexItem>()
+        protected HashSet<IndexItem> LocalData = new HashSet<IndexItem>()
         {
             new IndexItem("1", "Homer Simpson"),
             new IndexItem("2", "Marge Simpson"),
@@ -27,6 +28,8 @@ namespace Search.Tests
             new IndexItem("8", "Moe Szyslak"),
             new IndexItem("9", "Milhouse Van Houten")
         };
+
+        protected HashSet<IndexItem> ExternalData;
 
         protected SearchEngine SetUp(FuzzySearchType fuzzySearchType)
         {
