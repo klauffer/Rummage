@@ -3,6 +3,7 @@
     public enum FuzzySearchType
     {
         Basic,
-        Levenshtein
+        Levenshtein,
+        DamerauLevenshtein
     }
 }

@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Search.FuzzySearch
 {
-    internal sealed class LevenshteinSearch : IFuzzySearch
+    internal sealed class DamerauLevenshteinSearch : IFuzzySearch
     {
         private readonly ILogger _logger;
 
-        public LevenshteinSearch(ILogger logger)
+        public DamerauLevenshteinSearch(ILogger logger)
         {
             _logger = logger;
         }
@@ -29,7 +29,7 @@ namespace Search.FuzzySearch
                 }
                 cancellationToken.ThrowIfCancellationRequested();
             }
-            return searchStrengths.OrderBy(x=>x.Key).Select(x=>x.Value);
+            return searchStrengths.OrderBy(x => x.Key).Select(x => x.Value);
         }
 
         private int CalculateDistance(string searchTerm, string indexedPhrase)
@@ -70,9 +70,18 @@ namespace Search.FuzzySearch
                                      Math.Min(distance[i - 1, j] + 1,
                                               distance[i, j - 1] + 1),
                                      distance[i - 1, j - 1] + cost);
+                    if (i > 1 
+                        && j > 1
+                        && searchTerm[i - 1] == indexedPhrase[j - 2]
+                        && searchTerm[i - 2] == indexedPhrase[j - 1])
+                    {
+                        distance[i, j] = Math.Min(distance[i, j],
+                        distance[i - 2, j - 2] + cost); // permutation
+                    }
                 }
             }
             return distance[searchTermLength, indexedPhraseLength];
         }
     }
 }
+

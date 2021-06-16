@@ -13,6 +13,8 @@ namespace Search.FuzzySearch
                     return new BasicSearch(logger);
                 case FuzzySearchType.Levenshtein:
                     return new LevenshteinSearch(logger);
+                case FuzzySearchType.DamerauLevenshtein:
+                    return new DamerauLevenshteinSearch(logger);
                 default:
                     throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name);
             }
