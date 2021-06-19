@@ -49,7 +49,7 @@ namespace Search.Tests
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", LocalData, token));
         }
 
-        [Fact]
+        [RunnableInDebugOnly]
         public async Task FindMatchWithinTimeFrame()
         {
             var stopWatch = new Stopwatch();

@@ -34,6 +34,14 @@ namespace Search.Tests
         }
 
         [Fact]
+        public async Task FindMisspelledWord()
+        {
+            var searchResult = await _searchEngine.Search("Flenders", LocalData);
+            var actual = searchResult.FirstOrDefault();
+            Assert.Equal("Ned Flanders", actual.MatchingPhrase);
+        }
+
+        [Fact]
         public async Task NotFindMatch()
         {
             var searchResult = await _searchEngine.Search("qwerty", LocalData);
@@ -49,7 +57,7 @@ namespace Search.Tests
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", LocalData, token));
         }
 
-        [Fact]
+        [RunnableInDebugOnly]
         public async Task FindMatchWithinTimeFrame()
         {
             var stopWatch = new Stopwatch();
