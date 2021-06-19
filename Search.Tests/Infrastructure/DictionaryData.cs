@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Search.Tests
+namespace Search.Tests.Infrastructure
 {
     public static class DictionaryData
     {

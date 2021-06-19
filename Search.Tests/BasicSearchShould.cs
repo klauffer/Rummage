@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Search.FuzzySearch;
+using Search.Tests.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
