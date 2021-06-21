@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Search.FuzzySearch;
-using Search.Tests.Infrastructure;
+using Search.Tests.TestHelpers;
 using Xunit;
 using Xunit.Abstractions;
 

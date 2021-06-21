@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Search.Tests.Infrastructure
+namespace Search.Tests.TestHelpers
 {
     internal sealed class TestLoggerProvider : ILoggerProvider
     {

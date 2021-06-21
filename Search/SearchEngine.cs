@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Search.FuzzySearch;
+using Search.Infrastructure;
 
 namespace Search
 {
@@ -36,9 +38,25 @@ namespace Search
         /// <returns>an ordered collection of results starting with the strongest</returns>
         public Task<IEnumerable<SearchResult>> Search(string searchTerm, HashSet<IndexItem> dataToSearch, CancellationToken cancellationToken = default)
         {
-            var searchResults = _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
-            _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
-            return Task.FromResult(searchResults);
+            try
+            {
+                searchTerm.ThrowOnNullOrEmpty("searchTerm");
+                dataToSearch.ThrowOnNullOrEmpty("dataToSearch");
+                var searchResults = _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
+                _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
+                return Task.FromResult(searchResults);
+            }
+            catch (OperationCanceledException ex)
+            {
+                _logger.LogInformation("Search for {searchTerm} has been cancelled", searchTerm);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Search failed when searching for term {searchTerm}.", searchTerm);
+                throw;
+            }
+            
         }
     }
 }

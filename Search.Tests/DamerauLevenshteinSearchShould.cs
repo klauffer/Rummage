@@ -1,10 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Search.FuzzySearch;
-using Search.Tests.Infrastructure;
+using Search.Tests.TestHelpers;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -56,15 +54,6 @@ namespace Search.Tests
         {
             var searchResult = await _searchEngine.Search("qwerty", LocalData);
             Assert.DoesNotContain(searchResult, x => x.MatchingPhrase == "qwerty");
-        }
-
-        [Fact]
-        public async Task CancelSearch()
-        {
-            CancellationTokenSource tokenSource = new CancellationTokenSource();
-            CancellationToken token = tokenSource.Token;
-            tokenSource.Cancel();
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await _searchEngine.Search("qqq", LocalData, token));
         }
 
         [RunnableInDebugOnly]

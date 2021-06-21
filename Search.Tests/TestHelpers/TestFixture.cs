@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Search.FuzzySearch;
 using Xunit.Abstractions;
 
-namespace Search.Tests.Infrastructure
+namespace Search.Tests.TestHelpers
 {
     public abstract class TestFixture
     {
@@ -13,7 +13,7 @@ namespace Search.Tests.Infrastructure
         {
             OutputHelper = outputHelper;
             _searchEngine = SetUp(fuzzySearchType);
-            ExternalData = DictionaryData.GetData(@"Infrastructure/Dictionary.txt");
+            ExternalData = DictionaryData.GetData(@"TestHelpers/Dictionary.txt");
         }
 
         protected HashSet<IndexItem> LocalData = new HashSet<IndexItem>()
