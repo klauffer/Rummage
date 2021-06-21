@@ -7,17 +7,13 @@ namespace Search.FuzzySearch
     {
         public static IFuzzySearch GetFuzzySearch(FuzzySearchType type, ILogger logger)
         {
-            switch (type)
+            return type switch
             {
-                case FuzzySearchType.Basic:
-                    return new BasicSearch(logger);
-                case FuzzySearchType.Levenshtein:
-                    return new LevenshteinSearch(logger);
-                case FuzzySearchType.DamerauLevenshtein:
-                    return new DamerauLevenshteinSearch(logger);
-                default:
-                    throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name);
-            }
+                FuzzySearchType.Basic => new BasicSearch(logger),
+                FuzzySearchType.Levenshtein => new LevenshteinSearch(logger),
+                FuzzySearchType.DamerauLevenshtein => new DamerauLevenshteinSearch(logger),
+                _ => throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name),
+            };
         }
     }
 }
