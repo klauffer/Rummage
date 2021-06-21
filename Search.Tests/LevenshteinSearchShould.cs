@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class LevenshteinSearchShould : TestFixture
+    public sealed class LevenshteinSearchShould : TestFixture
     {
         public LevenshteinSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Levenshtein)
         {

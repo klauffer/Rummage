@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class BasicSearchShould : TestFixture
+    public sealed class BasicSearchShould : TestFixture
     {
         public BasicSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Basic)
         {

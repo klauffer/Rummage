@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace Search.Tests
 {
-    public class DotNetDIShould : TestFixture
+    public sealed class DotNetDIShould : TestFixture
     {
         public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Basic)
         {

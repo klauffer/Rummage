@@ -2,7 +2,7 @@
 
 namespace Search.Tests
 {
-    public class IndexItemShould
+    public sealed class IndexItemShould
     {
         [Fact]
         public void NotEquate()
