@@ -46,7 +46,7 @@ namespace Search
                 _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
                 return Task.FromResult(searchResults);
             }
-            catch (OperationCanceledException ex)
+            catch (OperationCanceledException)
             {
                 _logger.LogInformation("Search for {searchTerm} has been cancelled", searchTerm);
                 throw;
