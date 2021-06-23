@@ -6,10 +6,6 @@
     public enum FuzzySearchType
     {
         /// <summary>
-        /// the most basic of searches. this is simply a contains expression
-        /// </summary>
-        Basic,
-        /// <summary>
         /// Measure the distance between words with single character edits(insertions, deletions or substitutions)
         /// </summary>
         Levenshtein,

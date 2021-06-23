@@ -8,7 +8,7 @@ namespace Search.Tests
 {
     public sealed class DotNetDIShould : TestFixture
     {
-        public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Basic)
+        public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Levenshtein)
         {
         }
 
@@ -16,7 +16,7 @@ namespace Search.Tests
         public void MapSearchEngine()
         {
             var service = new ServiceCollection();
-            service.AddSearch(FuzzySearchType.Basic);
+            service.AddSearch(FuzzySearchType.Levenshtein);
             service.AddTransient(_ => GetLogger());
             var provider = service.BuildServiceProvider();
             var searchEngine = provider.GetService<SearchEngine>();

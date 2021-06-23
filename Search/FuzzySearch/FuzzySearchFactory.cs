@@ -9,7 +9,6 @@ namespace Search.FuzzySearch
         {
             return type switch
             {
-                FuzzySearchType.Basic => new BasicSearch(logger),
                 FuzzySearchType.Levenshtein => new LevenshteinSearch(logger),
                 FuzzySearchType.DamerauLevenshtein => new DamerauLevenshteinSearch(logger),
                 _ => throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name),
