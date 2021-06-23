@@ -31,6 +31,7 @@ namespace Search.Tests
             Assert.True(indexItem1 == indexItem2);
         }
 
+
         [Fact]
         public void NotEquateWithOperand()
         {

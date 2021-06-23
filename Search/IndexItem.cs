@@ -1,11 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Search.Infrastructure;
 
 namespace Search
 {
     /// <summary>
     /// Represents a single record that is being searched for
     /// </summary>
-    public sealed class IndexItem : IEquatable<IndexItem>
+    public sealed class IndexItem : ValueObject
     {
         /// <summary>
         /// Instantiates an IdexItem with the required fields to make this object immutable
@@ -28,75 +29,10 @@ namespace Search
         /// </summary>
         public string Phrase { get; set; }
 
-        /// <summary>
-        /// equality implementation for IndexItem
-        /// </summary>
-        /// <param name="other">the other Index Item that is being compared against</param>
-        /// <returns>True or false based on match</returns>
-        public bool Equals(IndexItem other)
+        ///<inheritdoc/>
+        protected override IEnumerable<object> GetEqualityComponents()
         {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (PhraseId == other.PhraseId)
-            { 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            yield return PhraseId;
         }
-
-        /// <summary>
-        /// equality implementation for a Object
-        /// </summary>
-        /// <param name="obj">the other object that is being compared against</param>
-        /// <returns>True or false based on match</returns>
-        public override bool Equals(Object obj)
-        {
-            if (obj == null)
-                return false;
-
-            IndexItem indexItem = obj as IndexItem;
-            if (indexItem == null)
-                return false;
-            else
-                return Equals(indexItem);
-        }
-
-        /// <summary>
-        /// gets the HashCode for this object
-        /// </summary>
-        public override int GetHashCode()
-        {
-            return PhraseId.GetHashCode();
-        }
-
-        /// <summary>
-        /// equality implementation
-        /// </summary>
-        public static bool operator ==(IndexItem lhs, IndexItem rhs)
-        {
-            if (lhs is null)
-            {
-                if (rhs is null)
-                {
-                    return true;
-                }
-
-                // Only the left side is null.
-                return false;
-            }
-            // Equals handles case of null on right side.
-            return lhs.Equals(rhs);
-        }
-
-        /// <summary>
-        /// inequality implementation
-        /// </summary>
-        public static bool operator !=(IndexItem lhs, IndexItem rhs) => !(lhs == rhs);
     }
 }
