@@ -3,8 +3,8 @@ using System.Threading;
 
 namespace Search.FuzzySearch
 {
-    internal interface IFuzzySearch
+    internal interface IFuzzySearch<T>
     {
-        IEnumerable<SearchResult> Run(string searchTerm, HashSet<IndexItem> index, CancellationToken cancellationToken);
+        IEnumerable<SearchResult<T>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken);
     }
 }

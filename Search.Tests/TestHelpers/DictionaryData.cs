@@ -5,19 +5,19 @@ namespace Search.Tests.TestHelpers
 {
     public static class DictionaryData
     {
-        public static HashSet<IndexItem> GetData(string filePath)
+        public static HashSet<IndexItem<int>> GetData(string filePath)
         {
-            return new HashSet<IndexItem>(ReadFile(filePath));
+            return new HashSet<IndexItem<int>>(ReadFile(filePath));
         }
 
-        private static IEnumerable<IndexItem> ReadFile(string file)
+        private static IEnumerable<IndexItem<int>> ReadFile(string file)
         {
             string line;
             var id = 1;
             using var reader = File.OpenText(file);
             while ((line = reader.ReadLine()) != null)
             {
-                var newRecord = new IndexItem(id.ToString(), line);
+                var newRecord = IndexItem<int>.From(PhraseId<int>.From(id), line);
                 yield return newRecord;
                 id++;
             }

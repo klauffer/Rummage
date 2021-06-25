@@ -3,14 +3,14 @@
     /// <summary>
     /// The a single result of a search
     /// </summary>
-    public sealed class SearchResult
+    public sealed class SearchResult<T>
     {
         /// <summary>
         /// forces instantiation of required fields to make immutable
         /// </summary>
         /// <param name="phraseId">a uniquely identifying value</param>
         /// <param name="matchingPhrase">the string that is being searched</param>
-        public SearchResult(string phraseId, string matchingPhrase)
+        public SearchResult(PhraseId<T> phraseId, string matchingPhrase)
         {
             PhraseId = phraseId;
             MatchingPhrase = matchingPhrase;
@@ -19,7 +19,7 @@
         /// <summary>
         /// a uniquely identifying value
         /// </summary>
-        public string PhraseId { get; }
+        public PhraseId<T> PhraseId { get; }
 
         /// <summary>
         /// the string that is being searched

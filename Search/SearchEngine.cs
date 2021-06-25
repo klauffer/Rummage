@@ -13,9 +13,9 @@ namespace Search
     /// <summary>
     /// Given a set of parameters and settings will perform searches on the given data set to find the closest match to the given search term
     /// </summary>
-    public sealed class SearchEngine
+    public sealed class SearchEngine<T>
     { 
-        private readonly IFuzzySearch _fuzzySearch;
+        private readonly IFuzzySearch<T> _fuzzySearch;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Search
         /// <param name="logger">a logger to provide feedback to an implementation</param>
         public SearchEngine(FuzzySearchType searchType, ILogger logger)
         {
-            _fuzzySearch = FuzzySearchFactory.GetFuzzySearch(searchType, logger);
+            _fuzzySearch = FuzzySearchFactory<T>.GetFuzzySearch(searchType, logger);
             _logger = logger;
         }
 
@@ -36,7 +36,7 @@ namespace Search
         /// <param name="dataToSearch">the data set to search against</param>
         /// <param name="cancellationToken">cancellation token that will abandon a search</param>
         /// <returns>an ordered collection of results starting with the strongest</returns>
-        public Task<IEnumerable<SearchResult>> Search(string searchTerm, HashSet<IndexItem> dataToSearch, CancellationToken cancellationToken = default)
+        public Task<IEnumerable<SearchResult<T>>> Search(string searchTerm, HashSet<IndexItem<T>> dataToSearch, CancellationToken cancellationToken = default)
         {
             try
             {

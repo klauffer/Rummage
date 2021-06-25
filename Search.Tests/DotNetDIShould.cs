@@ -16,10 +16,10 @@ namespace Search.Tests
         public void MapSearchEngine()
         {
             var service = new ServiceCollection();
-            service.AddSearch(FuzzySearchType.Levenshtein);
+            service.AddSearch<int>(FuzzySearchType.Levenshtein);
             service.AddTransient(_ => GetLogger());
             var provider = service.BuildServiceProvider();
-            var searchEngine = provider.GetService<SearchEngine>();
+            var searchEngine = provider.GetService<SearchEngine<int>>();
             Assert.NotNull(searchEngine);
         }
     }

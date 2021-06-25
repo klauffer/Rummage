@@ -8,7 +8,7 @@ namespace Search.Tests.TestHelpers
     public abstract class TestFixture
     {
         private ITestOutputHelper OutputHelper { get; }
-        protected readonly SearchEngine _searchEngine;
+        protected readonly SearchEngine<int> _searchEngine;
         public TestFixture(ITestOutputHelper outputHelper, FuzzySearchType fuzzySearchType)
         {
             OutputHelper = outputHelper;
@@ -16,27 +16,27 @@ namespace Search.Tests.TestHelpers
             ExternalData = DictionaryData.GetData(@"TestHelpers/Dictionary.txt");
         }
 
-        protected HashSet<IndexItem> LocalData = new HashSet<IndexItem>()
+        protected HashSet<IndexItem<int>> LocalData = new HashSet<IndexItem<int>>()
         {
-            new IndexItem("1", "Homer Simpson"),
-            new IndexItem("2", "Marge Simpson"),
-            new IndexItem("3", "Bart Simpson"),
-            new IndexItem("4", "Lisa Simpson"),
-            new IndexItem("5", "Maggie Simpson"),
-            new IndexItem("6", "Abraham Jebediah Simpson"),
-            new IndexItem("7", "Ned Flanders"),
-            new IndexItem("8", "Moe Szyslak"),
-            new IndexItem("9", "Milhouse Van Houten")
+            IndexItem<int>.From(PhraseId<int>.From(1), "Homer Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(2), "Marge Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(3), "Bart Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(4), "Lisa Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(5), "Maggie Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(6), "Abraham Jebediah Simpson"),
+            IndexItem<int>.From(PhraseId<int>.From(7), "Ned Flanders"),
+            IndexItem<int>.From(PhraseId<int>.From(8), "Moe Szyslak"),
+            IndexItem<int>.From(PhraseId<int>.From(9), "Milhouse Van Houten")
         };
 
-        protected HashSet<IndexItem> ExternalData;
+        protected HashSet<IndexItem<int>> ExternalData;
 
-        protected SearchEngine SetUp(FuzzySearchType fuzzySearchType)
+        protected SearchEngine<int> SetUp(FuzzySearchType fuzzySearchType)
         {
             var logger = GetLogger();
-            return new SearchEngine(fuzzySearchType, logger);
+            return new SearchEngine<int>(fuzzySearchType, logger);
         }
 
-        protected ILogger GetLogger() => TestLogger.CreateLogger<SearchEngine>(OutputHelper);
+        protected ILogger GetLogger() => TestLogger.CreateLogger<SearchEngine<int>>(OutputHelper);
     }
 }

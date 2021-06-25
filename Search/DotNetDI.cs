@@ -14,10 +14,10 @@ namespace Search
         /// </summary>
         /// <param name="service">the DotNet Di ServiceCollection</param>
         /// <param name="fuzzySearchType">the type of search algorithm to be run</param>
-        public static void AddSearch(this IServiceCollection service, FuzzySearchType fuzzySearchType)
+        public static void AddSearch<T>(this IServiceCollection service, FuzzySearchType fuzzySearchType)
         {
             service.AddTransient(provider => 
-                new SearchEngine(fuzzySearchType, provider.GetService<ILogger>()));
+                new SearchEngine<T>(fuzzySearchType, provider.GetService<ILogger>()));
         }
     }
 }

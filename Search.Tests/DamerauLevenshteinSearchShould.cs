@@ -19,17 +19,17 @@ namespace Search.Tests
         public async Task FindExactMatch()
         {
             var searchResult = await _searchEngine.Search("Homer Simpson", LocalData);
-            var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
-            Assert.Equal("1", actual.PhraseId);
+            var expectedPhraseId = PhraseId<int>.From(1);
+            var actual = searchResult.FirstOrDefault(x => x.PhraseId == expectedPhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
         }
 
         [Fact]
         public async Task FindSubsetMatch()
         {
+            var expectedPhraseId = PhraseId<int>.From(1);
             var searchResult = await _searchEngine.Search("omer", LocalData);
-            var actual = searchResult.FirstOrDefault(x => x.PhraseId == "1");
-            Assert.Equal("1", actual.PhraseId);
+            var actual = searchResult.FirstOrDefault(x => x.PhraseId == expectedPhraseId);
             Assert.Equal("Homer Simpson", actual.MatchingPhrase);
         }
 

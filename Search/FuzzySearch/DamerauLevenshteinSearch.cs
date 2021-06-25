@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Search.FuzzySearch
 {
-    internal sealed class DamerauLevenshteinSearch : IFuzzySearch
+    internal sealed class DamerauLevenshteinSearch<T> : IFuzzySearch<T>
     {
         private readonly ILogger _logger;
 
@@ -15,16 +15,16 @@ namespace Search.FuzzySearch
             _logger = logger;
         }
 
-        public IEnumerable<SearchResult> Run(string searchTerm, HashSet<IndexItem> index, CancellationToken cancellationToken)
+        public IEnumerable<SearchResult<T>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Levenshtein algorithm for {searchTerm} is beginning", searchTerm);
-            var searchStrengths = new List<KeyValuePair<int, SearchResult>>();
+            var searchStrengths = new List<KeyValuePair<int, SearchResult<T>>>();
             foreach (var indexItem in index)
             {
                 var distance = CalculateDistance(searchTerm, indexItem.Phrase);
                 if (distance <= indexItem.Phrase.Length)
                 {
-                    var searchStrength = new KeyValuePair<int, SearchResult>(distance, new SearchResult(indexItem.PhraseId, indexItem.Phrase));
+                    var searchStrength = new KeyValuePair<int, SearchResult<T>>(distance, new SearchResult<T>(indexItem.PhraseId, indexItem.Phrase));
                     searchStrengths.Add(searchStrength);
                 }
                 cancellationToken.ThrowIfCancellationRequested();
