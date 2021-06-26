@@ -16,7 +16,7 @@ namespace Search
         }
 
         /// <summary>
-        /// Instantiates an IdexItem with the required fields to make this object immutable
+        /// Instantiates an IndexItem with the required fields to make this object immutable
         /// </summary>
         /// <param name="phraseId">a uniquely identifying value</param>
         /// <param name="phrase">the string that is being searched</param>
