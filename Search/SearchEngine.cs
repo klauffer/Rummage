@@ -43,12 +43,12 @@ namespace Search
                 searchTerm.ThrowOnNullOrEmpty("searchTerm");
                 dataToSearch.ThrowOnNullOrEmpty("dataToSearch");
                 var searchResults = await _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
-                _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
+                _logger.LogDebug("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
                 return searchResults;
             }
             catch (OperationCanceledException)
             {
-                _logger.LogInformation("Search for {searchTerm} has been cancelled", searchTerm);
+                _logger.LogDebug("Search for {searchTerm} has been cancelled", searchTerm);
                 throw;
             }
             catch (Exception ex)

@@ -18,7 +18,7 @@ namespace Search.FuzzySearch
 
         public Task<IEnumerable<SearchResult<T>>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Levenshtein algorithm for {searchTerm} is beginning", searchTerm);
+            _logger.LogDebug("Levenshtein algorithm for {searchTerm} is beginning", searchTerm);
             var searchStrengths = new List<KeyValuePair<int, SearchResult<T>>>();
             foreach (var indexItem in index)
             {
