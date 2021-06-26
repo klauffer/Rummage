@@ -36,15 +36,15 @@ namespace Search
         /// <param name="dataToSearch">the data set to search against</param>
         /// <param name="cancellationToken">cancellation token that will abandon a search</param>
         /// <returns>an ordered collection of results starting with the strongest</returns>
-        public Task<IEnumerable<SearchResult<T>>> Search(string searchTerm, HashSet<IndexItem<T>> dataToSearch, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<SearchResult<T>>> Search(string searchTerm, HashSet<IndexItem<T>> dataToSearch, CancellationToken cancellationToken = default)
         {
             try
             {
                 searchTerm.ThrowOnNullOrEmpty("searchTerm");
                 dataToSearch.ThrowOnNullOrEmpty("dataToSearch");
-                var searchResults = _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
+                var searchResults = await _fuzzySearch.Run(searchTerm, dataToSearch, cancellationToken);
                 _logger.LogInformation("Search for {searchTerm} has retrieved {count} results", searchTerm, searchResults.Count());
-                return Task.FromResult(searchResults);
+                return searchResults;
             }
             catch (OperationCanceledException)
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace Search.FuzzySearch
@@ -15,7 +16,7 @@ namespace Search.FuzzySearch
             _logger = logger;
         }
 
-        public IEnumerable<SearchResult<T>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
+        public Task<IEnumerable<SearchResult<T>>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Levenshtein algorithm for {searchTerm} is beginning", searchTerm);
             var searchStrengths = new List<KeyValuePair<int, SearchResult<T>>>();
@@ -29,7 +30,8 @@ namespace Search.FuzzySearch
                 }
                 cancellationToken.ThrowIfCancellationRequested();
             }
-            return searchStrengths.OrderBy(x => x.Key).Select(x => x.Value);
+            return Task.FromResult(searchStrengths.OrderBy(x => x.Key)
+                                  .Select(x => x.Value));
         }
 
         private int CalculateDistance(string searchTerm, string indexedPhrase)

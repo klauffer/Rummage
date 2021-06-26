@@ -4,7 +4,7 @@ using Search.Infrastructure;
 namespace Search
 {
     /// <summary>
-    /// Phrase Id is teh unique Identifier for the Searched Index
+    /// Phrase Id is the unique Identifier for the Searched Index
     /// </summary>
     public sealed class PhraseId<T> : ValueObject
     {
