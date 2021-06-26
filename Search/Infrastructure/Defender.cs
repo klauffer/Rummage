@@ -6,16 +6,16 @@ namespace Search.Infrastructure
 {
     internal static class Defender
     {
-        public static void ThrowOnNullOrEmpty(this string arguementValue, string arguementName)
+        public static void ThrowOnNullOrEmpty(this string argumentValue, string argumentName)
         {
-            if (string.IsNullOrEmpty(arguementValue))
-                throw new ArgumentNullException(arguementName + " can't be null");
+            if (string.IsNullOrEmpty(argumentValue))
+                throw new ArgumentNullException(argumentName + " can't be null");
         }
 
-        public static void ThrowOnNullOrEmpty<T>(this IEnumerable<T> arguementValue, string arguementName)
+        public static void ThrowOnNullOrEmpty<T>(this IEnumerable<T> argumentValue, string argumentName)
         {
-            if (arguementValue == null || !arguementValue.Any())
-                throw new ArgumentNullException(arguementName + " can't be null");
+            if (argumentValue == null || !argumentValue.Any())
+                throw new ArgumentNullException(argumentName + " can't be null");
         }
     }
 }
