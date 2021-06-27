@@ -48,15 +48,13 @@ namespace Search.Tests
         }
 
         [RunnableInDebugOnly]
-        public async Task FindMatchWithinTimeFrame()
+        public void FindMatchWithinTimeFrame()
         {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            var searchResult = await _searchEngine.Search("idempotent", ExternalData);
-            stopWatch.Stop();
-            var actual = searchResult.FirstOrDefault();
-            Assert.Equal("idempotent", actual.MatchingPhrase);
-            Assert.InRange(stopWatch.ElapsedMilliseconds, 0, 3000);
+            var performanceGovernor = new PerformanceGovernor();
+            var time = performanceGovernor.Time(async () => await _searchEngine.Search("idempotent", ExternalData),
+                                                async () => await _searchEngine.Search("awesomeness", ExternalData),
+                                                async () => await _searchEngine.Search("awful", ExternalData));
+            Assert.InRange(time, 0, 3000);
         }
 
     }
