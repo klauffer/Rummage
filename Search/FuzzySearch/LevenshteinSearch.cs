@@ -1,41 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace Search.FuzzySearch
 {
-    internal sealed class LevenshteinSearch<T> : IFuzzySearch<T>
+    internal sealed class LevenshteinSearch<T> : DistanceSearches<T>, IFuzzySearch<T>
     {
-        private readonly ILogger _logger;
+        public LevenshteinSearch(ILogger logger) : base(logger) { }
 
-        public LevenshteinSearch(ILogger logger)
-        {
-            _logger = logger;
-        }
-
-        public Task<IEnumerable<SearchResult<T>>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
-        {
-            _logger.LogDebug("Levenshtein algorithm for {searchTerm} is beginning", searchTerm);
-            var searchStrengths = new List<KeyValuePair<int, SearchResult<T>>>();
-            foreach (var indexItem in index)
-            //for (int i = 0; i < index.Count; i++)
-            {
-                var distance = CalculateDistance(searchTerm, indexItem.Phrase);
-                if (distance <= indexItem.Phrase.Length)
-                {
-                    var searchStrength = new KeyValuePair<int, SearchResult<T>>(distance, new SearchResult<T>(indexItem.PhraseId, indexItem.Phrase));
-                    searchStrengths.Add(searchStrength);
-                }
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-            return Task.FromResult(searchStrengths.OrderBy(x => x.Key)
-                                                  .Select(x=>x.Value));
-        }
-
-        private int CalculateDistance(string searchTerm, string indexedPhrase)
+        protected override int CalculateDistance(string searchTerm, string indexedPhrase)
         {
             var searchTermLength = searchTerm.Length;
             var indexedPhraseLength = indexedPhrase.Length;
