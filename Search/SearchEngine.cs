@@ -19,10 +19,10 @@ namespace Search
         private readonly ILogger _logger;
 
         /// <summary>
-        /// setup a search engine with default behavior and a selection of algorithm 
+        /// Setup a search engine with default behavior and a selection of algorithm 
         /// </summary>
-        /// <param name="searchType">the algorithm that is to be performed when searching</param>
-        /// <param name="logger">a logger to provide feedback to an implementation</param>
+        /// <param name="searchType">The algorithm that is to be performed when searching</param>
+        /// <param name="logger">A logger to provide feedback to an implementation</param>
         public SearchEngine(FuzzySearchType searchType, ILogger logger)
         {
             _fuzzySearch = FuzzySearchFactory<T>.GetFuzzySearch(searchType, logger);
@@ -33,9 +33,9 @@ namespace Search
         /// Searches the given set for the given SearchTerm returns a list of results
         /// </summary>
         /// <param name="searchTerm">The phrase that is being searched for</param>
-        /// <param name="dataToSearch">the data set to search against</param>
-        /// <param name="cancellationToken">cancellation token that will abandon a search</param>
-        /// <returns>an ordered collection of results starting with the strongest</returns>
+        /// <param name="dataToSearch">The data set to search against</param>
+        /// <param name="cancellationToken">Cancellation token that will abandon a search</param>
+        /// <returns>An ordered collection of results starting with the strongest</returns>
         public async Task<IEnumerable<SearchResult<T>>> Search(string searchTerm, HashSet<IndexItem<T>> dataToSearch, CancellationToken cancellationToken = default)
         {
             try

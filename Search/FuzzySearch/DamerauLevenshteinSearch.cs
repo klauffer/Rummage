@@ -6,8 +6,7 @@ namespace Search.FuzzySearch
     internal sealed class DamerauLevenshteinSearch<T> : DistanceSearches<T>, IFuzzySearch<T>
     {
 
-        public DamerauLevenshteinSearch(ILogger logger) : base(logger)
-        {}
+        public DamerauLevenshteinSearch(ILogger logger) : base(logger) {}
 
         
 
@@ -29,13 +28,9 @@ namespace Search.FuzzySearch
             }
 
             // Initialize arrays.
-            for (int i = 0; i <= searchTermLength; distance[i, 0] = i++)
-            {
-            }
+            for (int i = 0; i <= searchTermLength; distance[i, 0] = i++){}
 
-            for (int j = 0; j <= indexedPhraseLength; distance[0, j] = j++)
-            {
-            }
+            for (int j = 0; j <= indexedPhraseLength; distance[0, j] = j++){}
 
             // compare each letter of one word to each letter of the other 
             // word and determine that letters distance to every letter on the other word
