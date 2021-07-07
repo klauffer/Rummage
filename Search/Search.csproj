@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Fuzz-E-Search</PackageId>
+    <Version>0.0.1</Version>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Kyle Lauffer</Authors>
     <Description>A complilation of search algorithms.</Description>
     <RepositoryUrl>https://github.com/klauffer/Search</RepositoryUrl>
-    <Version>0.0.1</Version>
     <PackageTags>Search; Fuzzy;</PackageTags>
     <Copyright>Copyright Kyle Lauffer</Copyright>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
