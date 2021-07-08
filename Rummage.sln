@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rummage", "Search\Rummage.c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rummage.Tests", "Search.Tests\Rummage.Tests.csproj", "{AC4470CB-C6C1-43FD-975E-10916E5BA2C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rummage.BenchMarks", "Rummage.BenchMarks\Rummage.BenchMarks.csproj", "{CFF1E039-A83E-4724-B766-C06E88B724F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AC4470CB-C6C1-43FD-975E-10916E5BA2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4470CB-C6C1-43FD-975E-10916E5BA2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4470CB-C6C1-43FD-975E-10916E5BA2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF1E039-A83E-4724-B766-C06E88B724F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF1E039-A83E-4724-B766-C06E88B724F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF1E039-A83E-4724-B766-C06E88B724F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF1E039-A83E-4724-B766-C06E88B724F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
