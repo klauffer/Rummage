@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Search.Tests.TestHelpers
+namespace Rummage.Tests.TestHelpers
 {
     public static class DictionaryData
     {

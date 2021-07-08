@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Search.FuzzySearch;
-using Search.Tests.TestHelpers;
+using Rummage.FuzzySearch;
+using Rummage.Tests.TestHelpers;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Search.Tests
+namespace Rummage.Tests
 {
     public sealed class DotNetDIShould : TestFixture
     {

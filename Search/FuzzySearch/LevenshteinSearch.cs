@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace Search.FuzzySearch
+namespace Rummage.FuzzySearch
 {
     internal sealed class LevenshteinSearch<T> : DistanceSearches<T>, IFuzzySearch<T>
     {

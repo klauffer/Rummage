@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Fuzz-E-Search</PackageId>
+    <PackageId>Rummage</PackageId>
     <Version>0.0.1</Version>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Kyle Lauffer</Authors>

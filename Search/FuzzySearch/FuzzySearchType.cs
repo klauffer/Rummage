@@ -1,4 +1,4 @@
-﻿namespace Search.FuzzySearch
+﻿namespace Rummage.FuzzySearch
 {
     /// <summary>
     /// types of supported algorithms 

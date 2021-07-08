@@ -1,4 +1,4 @@
-﻿namespace Search
+﻿namespace Rummage
 {
     /// <summary>
     /// The a single result of a search

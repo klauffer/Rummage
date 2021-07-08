@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Search.FuzzySearch;
+using Rummage.FuzzySearch;
 
-namespace Search
+namespace Rummage
 {
     /// <summary>
     /// helper class to provide an easy way to setup the Search inside of the DotNet DI system

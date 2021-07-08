@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Search.FuzzySearch
+namespace Rummage.FuzzySearch
 {
     internal interface IFuzzySearch<T>
     {

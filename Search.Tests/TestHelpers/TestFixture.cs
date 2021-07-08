@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-using Search.FuzzySearch;
+using Rummage.FuzzySearch;
 using Xunit.Abstractions;
 
-namespace Search.Tests.TestHelpers
+namespace Rummage.Tests.TestHelpers
 {
     public abstract class TestFixture
     {

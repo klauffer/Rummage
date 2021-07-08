@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Search.Infrastructure
+namespace Rummage.Infrastructure
 {
     internal static class Defender
     {

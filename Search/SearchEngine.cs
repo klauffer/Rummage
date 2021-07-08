@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Search.FuzzySearch;
-using Search.Infrastructure;
+using Rummage.FuzzySearch;
+using Rummage.Infrastructure;
 
-namespace Search
+namespace Rummage
 {
 
     /// <summary>

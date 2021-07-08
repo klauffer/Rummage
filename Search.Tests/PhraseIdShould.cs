@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Search.Tests
+namespace Rummage.Tests
 {
     public sealed class PhraseIdShould
     {

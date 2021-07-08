@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Search.FuzzySearch
+namespace Rummage.FuzzySearch
 {
     internal abstract class DistanceSearches<T>
     {

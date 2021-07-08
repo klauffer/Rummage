@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Search.Infrastructure;
+using Rummage.Infrastructure;
 
-namespace Search
+namespace Rummage
 {
     /// <summary>
     /// Phrase Id is the unique Identifier for the Searched Index

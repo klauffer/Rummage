@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Search.FuzzySearch;
-using Search.Tests.TestHelpers;
+using Rummage.FuzzySearch;
+using Rummage.Tests.TestHelpers;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Search.Tests
+namespace Rummage.Tests
 {
     public class SearchEngineShould : TestFixture
     {

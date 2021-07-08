@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Xunit;
 
-namespace Search.Tests.TestHelpers
+namespace Rummage.Tests.TestHelpers
 {
     // https://lostechies.com/jimmybogard/2013/06/20/run-tests-explicitly-in-xunit-net/
     public class RunnableInDebugOnlyAttribute : FactAttribute

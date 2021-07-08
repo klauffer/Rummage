@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Search.Infrastructure
+namespace Rummage.Infrastructure
 {
     /// <summary>
     /// A ValueObject is a object that its uniqueness is determined by its parts(or values)

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Search.Tests.TestHelpers
+namespace Rummage.Tests.TestHelpers
 {
     internal class PerformanceGovernor
     {
