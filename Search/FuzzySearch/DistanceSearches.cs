@@ -19,8 +19,10 @@ namespace Rummage.FuzzySearch
         public Task<IEnumerable<SearchResult<T>>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
         {
             Logger.LogDebug("Distance algorithm for {searchTerm} is beginning", searchTerm);
-            var parallelOptions = new ParallelOptions();
-            parallelOptions.CancellationToken = cancellationToken;
+            var parallelOptions = new ParallelOptions
+            {
+                CancellationToken = cancellationToken
+            };
             var searchStrengths = new ConcurrentBag<KeyValuePair<int, SearchResult<T>>>();
             Parallel.ForEach(index, parallelOptions, indexItem =>
             {
