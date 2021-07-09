@@ -8,6 +8,11 @@ using Moq;
 
 namespace Rummage.BenchMarks
 {
+    //[JsonExporterAttribute.Brief]
+    //[JsonExporterAttribute.Full]
+    //[JsonExporterAttribute.BriefCompressed]
+    //[JsonExporter("-custom", indentJson: true, excludeMeasurements: true)]
+    [MarkdownExporterAttribute.GitHub]
     public class SearchBenchmarks
     {
         private ILogger Logger => Mock.Of<ILogger>();
@@ -16,7 +21,7 @@ namespace Rummage.BenchMarks
         [Benchmark]
         public async Task<List<SearchResult<int>>> LevenshteinSearch()
         {
-            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.Levenshtein, Logger);
+            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.Levenshtein, Logger); 
             var result = await searchEngine.Search("idempotent", ExternalData);
             return result.ToList();
         }

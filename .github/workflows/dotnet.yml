@@ -30,4 +30,8 @@ jobs:
     - name: Pack Project
       run: dotnet pack --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
     - name: Push Package
+      on:
+        push:S
+          tags:
+          - '*.*.*'
       run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
