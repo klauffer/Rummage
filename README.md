@@ -1,7 +1,7 @@
 Rummage
 =======
 
-![CI](https://github.com/jbogard/MediatR/workflows/CI/badge.svg)
+![CI](https://github.com/klauffer/Rummage/workflows/CI/badge.svg)
 
 
 A Collection of Search Algorithms in .NET
