@@ -1,7 +1,7 @@
 Rummage
 =======
 
-![CI](https://github.com/klauffer/Rummage/workflows/CI/badge.svg)
+[![BuildDeploy](https://github.com/klauffer/Rummage/actions/workflows/BuildDeploy.yml/badge.svg)](https://github.com/klauffer/Rummage/actions/workflows/BuildDeploy.yml)
 
 
 A Collection of Search Algorithms in .NET
