@@ -11,7 +11,7 @@ A Collection of Search Algorithms in .NET
 
 You should install [Rummage with NuGet](https://www.nuget.org/packages/Rummage):
 
-    Install-Package MediatR
+    Install-Package Rummage
     
 Or via the .NET Core command line interface:
 
