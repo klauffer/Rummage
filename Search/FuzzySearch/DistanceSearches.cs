@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
-    internal abstract class DistanceSearches<T>
+    internal abstract class DistanceSearches<T> : IFuzzySearch<T>
     {
         private ILogger Logger { get; }
 

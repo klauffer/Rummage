@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
-    internal sealed class LevenshteinSearch<T> : DistanceSearches<T>, IFuzzySearch<T>
+    internal sealed class LevenshteinSearch<T> : DistanceSearches<T>
     {
         public LevenshteinSearch(ILogger logger) : base(logger) { }
 
