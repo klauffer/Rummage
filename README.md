@@ -19,6 +19,7 @@ Or via the .NET Core command line interface:
 
 Either commands, from Package Manager Console or .NET Core CLI, will download and install MediatR and all required dependencies.
 
+Examples in the [wiki](https://github.com/klauffer/Rummage/wiki).
 
 Performance
 =======
