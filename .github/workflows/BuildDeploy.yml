@@ -30,7 +30,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Pack Project
       if: startsWith( github.ref, 'refs/tags/releases/') 
-      run: dotnet pack --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      run: dotnet pack rummage/rummage.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
     - name: Push Package
       if: startsWith( github.ref, 'refs/tags/releases/') 
       run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
