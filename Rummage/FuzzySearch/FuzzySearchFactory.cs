@@ -11,6 +11,7 @@ namespace Rummage.FuzzySearch
             {
                 FuzzySearchType.Levenshtein => new LevenshteinSearch<T>(logger),
                 FuzzySearchType.DamerauLevenshtein => new DamerauLevenshteinSearch<T>(logger),
+                FuzzySearchType.Hamming => new HammingSearch<T>(logger),
                 _ => throw new ArgumentException($"FuzzySearchFactory does not know how to create {type}", type.GetType().Name),
             };
         }

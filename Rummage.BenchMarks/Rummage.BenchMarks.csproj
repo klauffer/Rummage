@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Search\Rummage.csproj" />
+    <ProjectReference Include="..\Rummage\Rummage.csproj" />
   </ItemGroup>
 
 </Project>

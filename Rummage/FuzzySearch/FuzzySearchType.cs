@@ -12,6 +12,11 @@
         /// <summary>
         /// Measure the distance between words consisting of insertions, deletions or substitutions of a single character, or transposition of two adjacent characters
         /// </summary>
-        DamerauLevenshtein
+        DamerauLevenshtein,
+        /// <summary>
+        /// Measures the distance between words using by forcing the searchterm and the terms its searching against to be the same length and then comparing equality of characters
+        /// </summary>
+        /// <remarks>This is an inaccurate search</remarks>
+        Hamming
     }
 }

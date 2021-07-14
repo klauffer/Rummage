@@ -22,6 +22,7 @@ Either commands, from Package Manager Console or .NET Core CLI, will download an
 
 Performance
 =======
+ 
 ``` ini
 
 BenchmarkDotNet=v0.13.0, OS=Windows 10.0.19043.1083 (21H1/May2021Update)
@@ -34,5 +35,6 @@ Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical 
 ```
 |                   Method |     Mean |   Error |  StdDev |
 |------------------------- |---------:|--------:|--------:|
-|        LevenshteinSearch | 309.0 ms | 4.78 ms | 3.99 ms |
-| DamerauLevenshteinSearch | 321.2 ms | 6.39 ms | 8.30 ms |
+|            HammingSearch | 342.2 ms | 6.00 ms | 5.61 ms |
+|        LevenshteinSearch | 274.5 ms | 3.43 ms | 3.04 ms |
+| DamerauLevenshteinSearch | 292.9 ms | 5.77 ms | 6.64 ms |

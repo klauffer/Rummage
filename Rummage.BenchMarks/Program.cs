@@ -8,15 +8,19 @@ using Moq;
 
 namespace Rummage.BenchMarks
 {
-    //[JsonExporterAttribute.Brief]
-    //[JsonExporterAttribute.Full]
-    //[JsonExporterAttribute.BriefCompressed]
-    //[JsonExporter("-custom", indentJson: true, excludeMeasurements: true)]
     [MarkdownExporterAttribute.GitHub]
     public class SearchBenchmarks
     {
         private ILogger Logger => Mock.Of<ILogger>();
-        private readonly HashSet<IndexItem<int>> ExternalData = DictionaryData.GetData(@"Dictionary.txt");
+        private  readonly HashSet<IndexItem<int>> ExternalData = DictionaryData.GetData(@"Dictionary.txt");
+
+        [Benchmark]
+        public async Task<List<SearchResult<int>>> HammingSearch()
+        {
+            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.Hamming, Logger);
+            var result = await searchEngine.Search("idempotent", ExternalData);
+            return result.ToList();
+        }
 
         [Benchmark]
         public async Task<List<SearchResult<int>>> LevenshteinSearch()
