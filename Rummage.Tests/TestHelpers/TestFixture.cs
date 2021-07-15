@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using Rummage.FuzzySearch;
 using Xunit.Abstractions;
 
@@ -7,11 +6,9 @@ namespace Rummage.Tests.TestHelpers
 {
     public abstract class TestFixture
     {
-        private ITestOutputHelper OutputHelper { get; }
         protected readonly SearchEngine<int> _searchEngine;
-        public TestFixture(ITestOutputHelper outputHelper, FuzzySearchType fuzzySearchType)
+        public TestFixture(FuzzySearchType fuzzySearchType)
         {
-            OutputHelper = outputHelper;
             _searchEngine = SetUp(fuzzySearchType);
         }
 
@@ -28,12 +25,9 @@ namespace Rummage.Tests.TestHelpers
             IndexItem<int>.From(PhraseId<int>.From(9), "Milhouse Van Houten")
         };
 
-        protected SearchEngine<int> SetUp(FuzzySearchType fuzzySearchType)
+        protected static SearchEngine<int> SetUp(FuzzySearchType fuzzySearchType)
         {
-            var logger = GetLogger();
-            return new SearchEngine<int>(fuzzySearchType, logger);
+            return new SearchEngine<int>(fuzzySearchType);
         }
-
-        protected ILogger GetLogger() => TestLogger.CreateLogger<SearchEngine<int>>(OutputHelper);
     }
 }

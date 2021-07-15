@@ -3,22 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
     internal abstract class DistanceSearches<T> : IFuzzySearch<T>
     {
-        private ILogger Logger { get; }
-
-        public DistanceSearches(ILogger logger)
-        {
-            Logger = logger;
-        }
-
         public Task<IEnumerable<SearchResult<T>>> Run(string searchTerm, HashSet<IndexItem<T>> index, CancellationToken cancellationToken)
         {
-            Logger.LogDebug("Distance algorithm for {searchTerm} is beginning", searchTerm);
             var parallelOptions = new ParallelOptions
             {
                 CancellationToken = cancellationToken

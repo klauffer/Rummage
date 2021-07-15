@@ -2,13 +2,12 @@
 using Rummage.FuzzySearch;
 using Rummage.Tests.TestHelpers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Rummage.Tests
 {
     public sealed class DotNetDIShould : TestFixture
     {
-        public DotNetDIShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Levenshtein)
+        public DotNetDIShould() : base(FuzzySearchType.Levenshtein)
         {
         }
 
@@ -17,7 +16,6 @@ namespace Rummage.Tests
         {
             var service = new ServiceCollection();
             service.AddSearch<int>(FuzzySearchType.Levenshtein);
-            service.AddTransient(_ => GetLogger());
             var provider = service.BuildServiceProvider();
             var searchEngine = provider.GetService<SearchEngine<int>>();
             Assert.NotNull(searchEngine);

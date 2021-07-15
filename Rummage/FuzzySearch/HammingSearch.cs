@@ -1,12 +1,9 @@
 ﻿using System.Linq;
-using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
     internal sealed class HammingSearch<T> : DistanceSearches<T>
     {
-        public HammingSearch(ILogger logger) : base(logger) { }
-
         protected override int CalculateDistance(string searchTerm, string indexedPhrase)
         {
 

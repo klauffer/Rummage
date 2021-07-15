@@ -1,16 +1,14 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Rummage.FuzzySearch;
 using Rummage.Tests.TestHelpers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Rummage.Tests
 {
     public sealed class LevenshteinSearchShould : TestFixture
     {
-        public LevenshteinSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Levenshtein)
+        public LevenshteinSearchShould() : base(FuzzySearchType.Levenshtein)
         {
         }
 

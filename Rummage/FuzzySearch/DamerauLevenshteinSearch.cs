@@ -1,15 +1,9 @@
 ﻿using System;
-using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
     internal sealed class DamerauLevenshteinSearch<T> : DistanceSearches<T>
-    {
-
-        public DamerauLevenshteinSearch(ILogger logger) : base(logger) {}
-
-        
-
+    {    
         protected override int CalculateDistance(string searchTerm, string indexedPhrase)
         {
             var searchTermLength = searchTerm.Length;

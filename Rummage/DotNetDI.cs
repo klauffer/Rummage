@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Rummage.FuzzySearch;
 
 namespace Rummage
@@ -16,8 +15,7 @@ namespace Rummage
         /// <param name="fuzzySearchType">the type of search algorithm to be run</param>
         public static void AddSearch<T>(this IServiceCollection service, FuzzySearchType fuzzySearchType)
         {
-            service.AddTransient(provider => 
-                new SearchEngine<T>(fuzzySearchType, provider.GetService<ILogger>()));
+            service.AddTransient(provider => new SearchEngine<T>(fuzzySearchType));
         }
     }
 }

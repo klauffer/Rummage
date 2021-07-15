@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 using Rummage.FuzzySearch;
 using Rummage.Tests.TestHelpers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Rummage.Tests
 {
     public class HammingSearchShould : TestFixture
     {
-        public HammingSearchShould(ITestOutputHelper outputHelper) : base(outputHelper, FuzzySearchType.Hamming)
+        public HammingSearchShould() : base(FuzzySearchType.Hamming)
         {
         }
 

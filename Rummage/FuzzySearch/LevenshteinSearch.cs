@@ -1,12 +1,9 @@
 ﻿using System;
-using Microsoft.Extensions.Logging;
 
 namespace Rummage.FuzzySearch
 {
     internal sealed class LevenshteinSearch<T> : DistanceSearches<T>
     {
-        public LevenshteinSearch(ILogger logger) : base(logger) { }
-
         protected override int CalculateDistance(string searchTerm, string indexedPhrase)
         {
             var searchTermLength = searchTerm.Length;
