@@ -13,7 +13,6 @@ namespace Rummage.Tests.TestHelpers
         {
             OutputHelper = outputHelper;
             _searchEngine = SetUp(fuzzySearchType);
-            ExternalData = DictionaryData.GetData(@"TestHelpers/Dictionary.txt");
         }
 
         protected HashSet<IndexItem<int>> LocalData = new HashSet<IndexItem<int>>()
@@ -28,8 +27,6 @@ namespace Rummage.Tests.TestHelpers
             IndexItem<int>.From(PhraseId<int>.From(8), "Moe Szyslak"),
             IndexItem<int>.From(PhraseId<int>.From(9), "Milhouse Van Houten")
         };
-
-        protected HashSet<IndexItem<int>> ExternalData;
 
         protected SearchEngine<int> SetUp(FuzzySearchType fuzzySearchType)
         {

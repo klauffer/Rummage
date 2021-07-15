@@ -55,15 +55,5 @@ namespace Rummage.Tests
             var searchResult = await _searchEngine.Search("qwerty", LocalData);
             Assert.DoesNotContain(searchResult, x => x.MatchingPhrase == "qwerty");
         }
-
-        [RunnableInDebugOnly]
-        public void FindMatchWithinTimeFrame()
-        {
-            var performanceGovernor = new PerformanceGovernor();
-            var time = performanceGovernor.Time(async () => await _searchEngine.Search("idempotent", ExternalData),
-                                                async () => await _searchEngine.Search("awesomeness", ExternalData),
-                                                async () => await _searchEngine.Search("awful", ExternalData));
-            Assert.InRange(time, 0, 3000);
-        }
     }
 }
