@@ -28,6 +28,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: temp
+      run: ls
     - name: Pack Project
       if: startsWith( github.ref, 'refs/tags/releases/') 
       run: dotnet pack Rummage/Rummage.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
