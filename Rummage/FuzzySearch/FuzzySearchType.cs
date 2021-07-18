@@ -14,9 +14,13 @@
         /// </summary>
         DamerauLevenshtein,
         /// <summary>
-        /// Measures the distance between words using by forcing the searchterm and the terms its searching against to be the same length and then comparing equality of characters
+        /// Measures the distance between words by forcing the searchterm and the terms its searching against to be the same length and then comparing equality of characters
         /// </summary>
         /// <remarks>This is an inaccurate search</remarks>
-        Hamming
+        Hamming,
+        /// <summary>
+        /// Measures the distance between words by finding the similar characters based on proximity and transpositions
+        /// </summary>
+        Jaro
     }
 }

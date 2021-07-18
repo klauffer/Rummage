@@ -4,7 +4,7 @@ namespace Rummage.FuzzySearch
 {
     internal sealed class HammingSearch<T> : DistanceSearches<T>
     {
-        protected override int CalculateDistance(string searchTerm, string indexedPhrase)
+        protected override double CalculateDistance(string searchTerm, string indexedPhrase)
         {
 
             if (searchTerm.Length > indexedPhrase.Length)

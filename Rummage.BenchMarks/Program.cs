@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Rummage.FuzzySearch;
 
 namespace Rummage.BenchMarks
 {
@@ -14,7 +15,7 @@ namespace Rummage.BenchMarks
         [Benchmark]
         public async Task<List<SearchResult<int>>> HammingSearch()
         {
-            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.Hamming);
+            var searchEngine = new SearchEngine<int>(FuzzySearchType.Hamming);
             var result = await searchEngine.Search("idempotent", ExternalData);
             return result.ToList();
         }
@@ -22,7 +23,7 @@ namespace Rummage.BenchMarks
         [Benchmark]
         public async Task<List<SearchResult<int>>> LevenshteinSearch()
         {
-            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.Levenshtein); 
+            var searchEngine = new SearchEngine<int>(FuzzySearchType.Levenshtein); 
             var result = await searchEngine.Search("idempotent", ExternalData);
             return result.ToList();
         }
@@ -30,7 +31,15 @@ namespace Rummage.BenchMarks
         [Benchmark]
         public async Task<List<SearchResult<int>>> DamerauLevenshteinSearch()
         {
-            var searchEngine = new Rummage.SearchEngine<int>(FuzzySearch.FuzzySearchType.DamerauLevenshtein);
+            var searchEngine = new SearchEngine<int>(FuzzySearchType.DamerauLevenshtein);
+            var result = await searchEngine.Search("idempotent", ExternalData);
+            return result.ToList();
+        }
+
+        [Benchmark]
+        public async Task<List<SearchResult<int>>> JaroSearch()
+        {
+            var searchEngine = new SearchEngine<int>(FuzzySearchType.Jaro);
             var result = await searchEngine.Search("idempotent", ExternalData);
             return result.ToList();
         }

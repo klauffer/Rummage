@@ -14,22 +14,23 @@ namespace Rummage.FuzzySearch
             {
                 CancellationToken = cancellationToken
             };
-            var searchStrengths = new ConcurrentBag<KeyValuePair<int, SearchResult<T>>>();
+            var searchStrengths = new ConcurrentBag<KeyValuePair<double, SearchResult<T>>>();
             Parallel.ForEach(index, parallelOptions, indexItem =>
             {
                 var distance = CalculateDistance(searchTerm, indexItem.Phrase);
                 if (distance <= indexItem.Phrase.Length)
                 {
-                    var searchStrength = new KeyValuePair<int, SearchResult<T>>(distance, new SearchResult<T>(indexItem.PhraseId, indexItem.Phrase));
+                    var searchStrength = new KeyValuePair<double, SearchResult<T>>(distance, new SearchResult<T>(indexItem.PhraseId, indexItem.Phrase));
                     searchStrengths.Add(searchStrength);
                 }
                 parallelOptions.CancellationToken.ThrowIfCancellationRequested();
             });
 
+            // Order by distance(
             return Task.FromResult(searchStrengths.OrderBy(x => x.Key)
                                   .Select(x => x.Value));
         }
 
-        protected abstract int CalculateDistance(string searchTerm, string indexedPhrase);
+        protected abstract double CalculateDistance(string searchTerm, string indexedPhrase);
     }
 }
